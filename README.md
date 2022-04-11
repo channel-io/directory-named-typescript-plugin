@@ -30,3 +30,14 @@ Additionally, if you use VSCode, you should change VSCode setting like this:
   ]
 }
 ```
+
+# Example
+- As-is
+  ```tsx
+  import FooComponent from 'src/components/Foo/Foo.tsx'
+  ```
+
+- To-be
+  ```tsx
+  import FooComponent from 'src/components/Foo'
+  ```
