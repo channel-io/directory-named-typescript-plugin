@@ -4,7 +4,8 @@
   "description": "This plugin allows using directory name module import.",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc index.ts"
+    "compile": "tsc index.ts",
+    "prepare": "npm run compile"
   },
   "repository": {
     "type": "git",
