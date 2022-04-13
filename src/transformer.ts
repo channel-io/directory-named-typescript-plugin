@@ -14,7 +14,7 @@ function transformer(program: ts.Program, host: ts.CompilerHost | undefined, opt
   function transformAst(ctx: ts.TransformationContext) {
     return (sourceFile: ts.SourceFile) => {
       function visitor(node: ts.Node): ts.Node {
-        if (typescript.isImportDeclaration(node) || typescript.isExportDeclaration(node)) {
+        if ((typescript.isImportDeclaration(node) || typescript.isExportDeclaration(node)) && node.moduleSpecifier) {
           const moduleName = node.moduleSpecifier.getText(sourceFile).slice(1, -1)
           const isValidModule = !!typescript.resolveModuleName(moduleName, sourceFile.fileName, compilerOptions, fileHelper.getHost()).resolvedModule
 
