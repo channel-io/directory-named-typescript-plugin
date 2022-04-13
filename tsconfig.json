@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "baseUrl": "./src",
+    "outDir": "dist"
+  }
+}
