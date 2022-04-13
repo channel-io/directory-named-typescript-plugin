@@ -14,13 +14,18 @@ function transformer(program: ts.Program, host: ts.CompilerHost | undefined, opt
   function transformAst(ctx: ts.TransformationContext) {
     return (sourceFile: ts.SourceFile) => {
       function visitor(node: ts.Node): ts.Node {
-        if (typescript.isImportDeclaration(node)) {
+        if (typescript.isImportDeclaration(node) || typescript.isExportDeclaration(node)) {
           const moduleName = node.moduleSpecifier.getText(sourceFile).slice(1, -1)
           const isValidModule = !!typescript.resolveModuleName(moduleName, sourceFile.fileName, compilerOptions, fileHelper.getHost()).resolvedModule
+
           if (!isValidModule && fileHelper.isInternalDirectoryModule(moduleName)) {
             const fileName = moduleName.split('/').slice(-1)
             const newModuleSpecifier = typescript.factory.createStringLiteral(`${moduleName}/${fileName}`)
-            return typescript.factory.updateImportDeclaration(node, node.decorators, node.modifiers, node.importClause, newModuleSpecifier, undefined)
+
+            if (typescript.isImportDeclaration(node)) {
+              return typescript.factory.updateImportDeclaration(node, node.decorators, node.modifiers, node.importClause, newModuleSpecifier, undefined)
+            }
+            return typescript.factory.updateExportDeclaration(node, node.decorators, node.modifiers, node.isTypeOnly, node.exportClause, newModuleSpecifier, undefined)
           }
         }
         return typescript.visitEachChild(node, visitor, ctx)
