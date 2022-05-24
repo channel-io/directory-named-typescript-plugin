@@ -39,10 +39,14 @@ function transformer(program: ts.Program, host: ts.CompilerHost | undefined, opt
 
   compilerHost.getSourceFile = (fileName: string, ...rest) => {
     const key = typescript.normalizePath(fileName)
-    if (fileCache.has(key)) { return fileCache.get(key) }
-    const result = superGetSourceFile(fileName, ...rest)
-    fileCache.set(key, result)
-    return result
+    const original = superGetSourceFile(fileName, ...rest)
+    if (fileCache.has(key)) {
+      const result = fileCache.get(key)
+      if (!result.version) { result.version = original.version }
+      return result
+    }
+    fileCache.set(key, original)
+    return original
   }
 
   const transformedSource = typescript.transform(
