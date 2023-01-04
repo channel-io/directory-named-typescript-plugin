@@ -23,9 +23,9 @@ function transformer(program: ts.Program, host: ts.CompilerHost | undefined, opt
             const newModuleSpecifier = typescript.factory.createStringLiteral(`${moduleName}/${fileName}`)
 
             if (typescript.isImportDeclaration(node)) {
-              return typescript.factory.updateImportDeclaration(node, node.decorators, node.modifiers, node.importClause, newModuleSpecifier, undefined)
+              return typescript.factory.updateImportDeclaration(node, node.modifiers, node.importClause, newModuleSpecifier, undefined)
             }
-            return typescript.factory.updateExportDeclaration(node, node.decorators, node.modifiers, node.isTypeOnly, node.exportClause, newModuleSpecifier, undefined)
+            return typescript.factory.updateExportDeclaration(node, node.modifiers, node.isTypeOnly, node.exportClause, newModuleSpecifier, undefined)
           }
         }
         return typescript.visitEachChild(node, visitor, ctx)

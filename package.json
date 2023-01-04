@@ -19,10 +19,10 @@
   "homepage": "https://github.com/channel-io/directory-named-typescript-plugin#readme",
   "devDependencies": {
     "@types/node": "^17.0.23",
-    "ts-expose-internals": "^4.5.5",
-    "typescript": "^4.6.3"
+    "ts-expose-internals": "^4.9.4",
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "ts-patch": "^2.0.1"
+    "ts-patch": "^2.1.0"
   }
 }
