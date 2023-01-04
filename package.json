@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/channel-io/directory-named-typescript-plugin#readme",
   "devDependencies": {
-    "@types/node": "^17.0.23",
     "ts-expose-internals": "^4.9.4",
     "typescript": "^4.9.4"
   },
